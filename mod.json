@@ -7,14 +7,13 @@
         "ios": "2.2081"
     },
     "version": "1.0.0",
-    "id": "MalikHw.level-info-api",
-    "name": "level-info-api",
-    "developer": "MalikHw",
-    "description": "desc.",
-    "tags": ["yes", "yeah"],
+    "id": "malikhw47-level-info-api",
+    "name": "level info api",
+    "developer": "MalikHw47",
+    "description": "Fetch level data directly without long code",
+    "tags": ["api", "online"],
     "links": {
         "source": "https://github.com/MalikHw/level-info-api",
         "community": "https://discord.gg/G9bZ92eg2n"
-    },
-    "settings": {}
+    }
 }
