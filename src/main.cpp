@@ -1,11 +1,13 @@
-#include "main.hpp"
+#include "../include/main.hpp"
 #include <Geode/utils/web.hpp>
 
 using namespace geode::prelude;
 
+// parse GD's insane response format
 std::optional<LevelData> parseLevelResponse(const std::string& response) {
     LevelData data;
-
+    
+    // GD uses : as separator between key-value pairs, and | for nested data
     std::vector<std::string> parts;
     std::stringstream ss(response);
     std::string item;
@@ -14,6 +16,7 @@ std::optional<LevelData> parseLevelResponse(const std::string& response) {
         parts.push_back(item);
     }
     
+    // Map of GD server keys to their meanings
     // 1 = level ID, 2 = level name, 3 = description (base64), 5 = version, 6 = player ID
     // 8 = difficulty, 9 = downloads, 10 = official song ID, 12 = official song
     // 13 = game version, 14 = likes, 15 = length, 17 = demon, 18 = stars
@@ -99,7 +102,7 @@ void LevelFetchAPI::fetchLevel(int levelID, LevelDataCallback callback) {
             return;
         }
         
-        // i only care about the first part
+        // We only care about the first part
         auto hashPos = responseStr.find('#');
         std::string levelData = (hashPos != std::string::npos) 
             ? responseStr.substr(0, hashPos) 
@@ -115,6 +118,5 @@ void LevelFetchAPI::fetchLevel(int levelID, LevelDataCallback callback) {
         
         callback(parsed);
     }, [callback](web::WebProgress* progress) {
-        // Progress callback, listen here motherfucker we don't need this but it's required
     });
 }
